@@ -1,7 +1,7 @@
 import React from 'react'
-import { TableContainer, Th, Thead, Tr, Tbody } from '../styles/Table'
+import { TableContainer, Th, Thead, Tr, Td, Tbody } from '../styles/Table'
 
-const Table = () => {
+const Table = ({users}) => {
   return (
     <TableContainer>
         <Thead>
@@ -12,7 +12,15 @@ const Table = () => {
             </Tr>
         </Thead>
         <Tbody>
-
+          {
+            users.map((item, i) => (
+              <Tr key={i}>
+                <Td>{item.titulo}</Td>
+                <Td>{item.autor}</Td>
+                <Td>{item.editora}</Td>
+              </Tr>
+            ))
+          }
         </Tbody>
     </TableContainer>
   )

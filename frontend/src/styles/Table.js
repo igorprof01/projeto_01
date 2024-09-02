@@ -17,4 +17,6 @@ export const Tr = styled.tr``;
 
 export const Th = styled.th``;
 
-export const Td = styled.td``;
+export const Td = styled.td`
+    text-align: center;
+`;
