@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   const [books, setBooks] = React.useState([]);
+  const [update, setUpdate] = React.useState(null);
 
   const getBooks = async () => {
     try {
@@ -25,8 +26,8 @@ const App = () => {
   return (
     <>
       <Container>
-        <Form />
-        <Table books={books} setBooks={setBooks}/>
+        <Form update={update} setUpdate={setUpdate} getBooks={getBooks} />
+        <Table books={books} setUpdate={setUpdate}/>
       </Container>
       <ToastContainer
         position="top-right"

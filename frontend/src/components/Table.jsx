@@ -3,7 +3,7 @@ import React, {useRef} from 'react'
 import { toast } from 'react-toastify'
 import { TableContainer, Th, Thead, Tr, Td, Tbody } from '../styles/Table'
 
-const Table = ({books}) => {
+const Table = ({books, setUpdate}) => {
 
   const deleteRow = async (id) => {
     await axios.delete(`http://localhost:3333/${id}`)
@@ -11,6 +11,10 @@ const Table = ({books}) => {
         toast.success(data)
     })
     .catch(() => toast.error("Não foi possível excluir o registro!"))
+  }
+
+  const handleUpdate = (item) => {
+    setUpdate(item)
   }
 
   return (
@@ -30,7 +34,7 @@ const Table = ({books}) => {
                 <Td>{item.autor}</Td>
                 <Td>{item.editora}</Td>
                 <Td><button onClick={() => deleteRow(item.id)}>Excluir</button></Td>
-                <Td><button onClick={() => updateRow(item.id)}>Editar</button></Td>
+                <Td><button onClick={() => handleUpdate(item)}>Editar</button></Td>
               </Tr>
             ))
           }

@@ -1,15 +1,23 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import { FormContainer, Label, Input, Button } from "../styles/Form";
 import axios from "axios";
 
-const Form = () => {
+const Form = ( {update, setUpdate, getBooks} ) => {
   const ref = useRef();
+
+  useEffect(() => {
+    if(update){
+      const book = ref.current;
+
+      book.titulo.value = update.titulo;
+      book.autor.value = update.autor;
+      book.editora.value = update.editora;
+    }
+  }, [update])
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    
 
     const book = ref.current;
 
@@ -17,9 +25,9 @@ const Form = () => {
       return toast.warn("Preencha todos os campos do formulário!");
     }
 
-    if (onUpdate) {
+    if (update) {
       await axios
-        .put(`http://localhost:3333/${id}`, {
+        .put(`http://localhost:3333/${update.id}`, {
           titulo: book.titulo.value,
           autor: book.autor.value,
           editora: book.editora.value,
@@ -35,6 +43,13 @@ const Form = () => {
         .then(() => toast.success("Cadastrado com sucesso!"))
         .catch(() => toast.error("Não foi possível cadastrar!"));
     }
+
+    book.titulo.value = "";
+    book.autor.value = "";
+    book.editora.value = "";
+
+    setUpdate(null)
+    getBooks()
   };
 
   return (
