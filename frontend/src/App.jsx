@@ -27,7 +27,7 @@ const App = () => {
     <>
       <Container>
         <Form update={update} setUpdate={setUpdate} getBooks={getBooks} />
-        <Table books={books} setUpdate={setUpdate}/>
+        <Table books={books} setUpdate={setUpdate} setBooks={setBooks}/>
       </Container>
       <ToastContainer
         position="top-right"
